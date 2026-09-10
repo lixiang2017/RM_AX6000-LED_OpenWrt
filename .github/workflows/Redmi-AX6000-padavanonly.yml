@@ -99,6 +99,16 @@ jobs:
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P1_SH
 
+    - name: 强行升级 Golang 工具链
+      working-directory: ./openwrt
+      run: |
+        rm -rf feeds/packages/lang/golang
+        git clone --depth=1 -b master https://github.com/immortalwrt/packages.git temp_packages
+        mv temp_packages/lang/golang feeds/packages/lang/
+        rm -rf temp_packages
+        ./scripts/feeds update -i
+        ./scripts/feeds install -f -p packages golang
+              
     - name: 更新 & 安装 feeds
       run: |
         cd openwrt
