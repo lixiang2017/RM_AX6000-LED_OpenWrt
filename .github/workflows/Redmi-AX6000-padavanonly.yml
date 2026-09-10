@@ -104,6 +104,7 @@ jobs:
       run: |
         rm -rf feeds/packages/lang/golang
         git clone --depth=1 -b master https://github.com/immortalwrt/packages.git temp_packages
+        mkdir -p feeds/packages/lang
         mv temp_packages/lang/golang feeds/packages/lang/
         rm -rf temp_packages
         ./scripts/feeds update -i
